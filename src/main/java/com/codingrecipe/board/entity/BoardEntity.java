@@ -45,6 +45,11 @@ public class BoardEntity extends BaseEntity {
     @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BoardFileEntity> boardFileEntityList = new ArrayList<>();
 
+    // board_table : board_comment_table = 1 : n 관계를 설정 -> board_table 기준으로 설정함
+    // 아래의 설정을 공식 처럼 사용함(부모 기준)
+    @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<CommentEntity> commentEntityList = new ArrayList<>();
+
     public static BoardEntity toSaveBoardEntity(BoardDTO boardDTO) {
 
         BoardEntity boardEntity = new BoardEntity();
